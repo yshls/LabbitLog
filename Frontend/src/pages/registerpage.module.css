@@ -1,0 +1,32 @@
+.container {
+  width: calc(100% - 2em);
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.container input {
+  padding: 1em;
+  border-radius: 0.25em;
+  border: 1px solid #fba12f;
+  outline: none;
+  border-radius: 8px;
+}
+
+.container input:focus {
+  border-color: #fba12f;
+  box-shadow: 0 0 0 3px rgba(251, 161, 47, 0.3); /* 포커스 시 하이라이트 */
+}
+
+.container strong {
+  font-weight: normal;
+  font-size: 0.75em;
+}
+.container button {
+  padding: 1em;
+  background-color: #fba12f;
+  border-radius: 1em;
+  align-self: center;
+}

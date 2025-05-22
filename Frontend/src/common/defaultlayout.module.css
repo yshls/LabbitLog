@@ -1,0 +1,7 @@
+.defaultlayout {
+  max-width: 600px;
+  height: 100vh;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
