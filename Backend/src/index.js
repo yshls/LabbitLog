@@ -39,17 +39,30 @@ const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 import jwt from 'jsonwebtoken';
 const secretKey = process.env.JWT_SECRET;
 const tokenLife = process.env.JWT_EXPIRATION; // 토큰 유효시간
+
+const cookieOptions = {
+  httpOnly: true,
+  maxAge: 1000 * 60 * 60, // 쿠키 만료 시간 (1시간)
+  secure: process.env.NODE_ENV === 'production', // HTTPS 환경에서만 쿠키 전송
+  sameSite: 'Strict', // CSRF 공격 방지
+  path: '/', // 쿠키의 경로
+};
+
 app.post('/register', async (req, res) => {
   try {
+    console.log('----', req.body);
     const { name, email, password } = req.body;
 
+    // 이메일 중복 확인
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ error: '이미 존재하는 이메일입니다.' });
     }
 
+    // 비밀번호 유효성 검사
     const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
+    // 사용자 저장
     const userDoc = new userModel({
       username: name,
       email,
@@ -97,18 +110,12 @@ app.post('/login', async (req, res) => {
         expiresIn: tokenLife,
       });
 
-      res
-        .cookie('token', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60,
-        })
-        .status(200)
-        .json({
-          success: true,
-          id: _id,
-          username,
-          email,
-        });
+      // 쿠키에 토큰 저장
+      res.cookie('token', token, cookieOptions).json({
+        id: userDoc._id,
+        email,
+        username,
+      });
     }
   } catch (error) {
     console.error('로그인 오류:', error);
@@ -133,10 +140,13 @@ app.get('/profile', (req, res) => {
 
 // 로그아웃
 app.post('/logout', (req, res) => {
+  // 쿠키 옵션을 로그인과 일관되게 유지하되, maxAge만 0으로 설정
+  const logoutCookieOptions = {
+    ...cookieOptions,
+    maxAge: 0,
+  };
+
   res
-    .cookie('token', '', {
-      httpOnly: true,
-      maxAge: 0, // 쿠키 만료
-    })
+    .cookie('token', '', logoutCookieOptions)
     .json({ message: '로그아웃 되었음' });
 });
