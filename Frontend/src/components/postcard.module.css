@@ -1,0 +1,89 @@
+/* post */
+.postcard {
+  border-bottom: 1px dotted #e3e3e3;
+  cursor: pointer;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.title {
+  padding: 1rem 1rem 0;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: #666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.post_text {
+  padding: 0 1rem;
+  font-size: 0.75rem;
+}
+
+.post_img {
+  overflow: hidden;
+  position: relative;
+  padding-top: 50%;
+}
+.post_img img {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.2s ease-in-out;
+}
+.postcard:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+.postcard:hover img {
+  transform: scale(1.1);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding: 0 1rem;
+}
+.author {
+  color: dodgerblue;
+  font-weight: bold;
+  padding: 0.25rem 1rem 0.25rem 0;
+}
+.author:hover {
+  color: rgb(1, 75, 148);
+}
+
+.date {
+  color: #999;
+  margin-left: 0.5rem;
+}
+.dec {
+  padding: 0 1rem;
+  font-size: 0.8rem;
+  line-height: 1.25rem;
+  color: #000;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.heart {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.heart.liked {
+  color: red;
+}

@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 import QuillEditor from '../components/QuillEditor'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-//
-import { createPost } from '../apis/postApi'
 
 export const CreatePost = () => {
   const navigate = useNavigate()
@@ -16,6 +14,7 @@ export const CreatePost = () => {
   const [error, setError] = useState('')
 
   const user = useSelector(state => state.user.user)
+  // 사용자 정보가 없으면 로그인 페이지로 리디렉션
   useEffect(() => {
     if (!user || !user.username) {
       navigate('/login')
@@ -28,6 +27,9 @@ export const CreatePost = () => {
 
   const handleCreatePost = async e => {
     e.preventDefault()
+    console.log('제출')
+    // console.log(title, summary, content)
+    console.log(files) // 배열 정보 확인
 
     setIsSubmitting(true)
     setError('')
@@ -49,7 +51,6 @@ export const CreatePost = () => {
     }
 
     try {
-      await createPost(data)
       console.log('등록성공')
 
       setIsSubmitting(false)

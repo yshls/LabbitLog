@@ -157,12 +157,12 @@ import path from 'path';
 import fs from 'fs';
 import { postModel } from './model/post.js';
 
-import { fileURLToPath } from './model/post.js';
+import { fileURLToPath } from 'url';
 // __dirname 설정 (ES 모듈에서는 __dirname이 기본적으로 제공되지 않음)
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.firname(__filename);
+const __dirname = path.dirname(__filename);
 
-app.use('/upload', express.static(path.join(__dirnamem, 'uploads')));
+app.use('/upload', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/uploads/:filename', (req, res) => {
   const { filename } = req.params;

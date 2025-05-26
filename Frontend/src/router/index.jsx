@@ -3,7 +3,7 @@ import { DefaultLayout } from '../common/DefaultLayout'
 import { RegisterPage } from '../pages/RegisterPage'
 import { LoginPage } from '../pages/LoginPage'
 import { CreatePost } from '../pages/CreatePost'
-
+import PostCard from '../components/PostCard'
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -12,7 +12,14 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>블로그 리스트</div>,
+        element: (
+          <div>
+            <h1>블로그 리스트</h1>
+            <PostCard />
+            <PostCard />
+            <PostCard />
+          </div>
+        ),
       },
       {
         path: '/register',

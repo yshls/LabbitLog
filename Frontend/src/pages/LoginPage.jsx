@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { loginUser } from '../apis/userApi'
+import { loginUser } from '../apis/userApi.js'
 
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../store/userSlice'
@@ -36,10 +36,10 @@ export const LoginPage = () => {
   const onSubmit = async data => {
     try {
       const res = await loginUser(data)
-      if (res.success) {
+
+      if (res.email && res.username) {
         dispatch(setUserInfo({ username: res.username, email: res.email }))
-        // 로그인 성공 시
-        navigate('/') // 홈으로 이동
+        navigate('/')
       } else {
         setLoginError('로그인 실패: 아이디 또는 비밀번호를 확인하세요')
       }

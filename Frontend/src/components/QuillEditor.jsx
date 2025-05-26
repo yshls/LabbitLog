@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import ReactQuill from 'react-quill-new'
 import 'react-quill-new/dist/quill.snow.css'
-// import './QuillEditor.css'
+import '../components/QuilEditor.css'
 /** useRef 사용 이유
 변하지 않는 값을 저장하거나 DOM에 직접 접근 할때 사용 여기서는 자동 텍스트 삽입 같은 기능으로 인해 useRef 사용 */
 
