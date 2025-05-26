@@ -150,3 +150,75 @@ app.post('/logout', (req, res) => {
     .cookie('token', '', logoutCookieOptions)
     .json({ message: '로그아웃 되었음' });
 });
+
+//백엔드 post 등록 로직
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { postModel } from './model/post.js';
+
+import { fileURLToPath } from './model/post.js';
+// __dirname 설정 (ES 모듈에서는 __dirname이 기본적으로 제공되지 않음)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.firname(__filename);
+
+app.use('/upload', express.static(path.join(__dirnamem, 'uploads')));
+
+app.get('/uploads/:filename', (req, res) => {
+  const { filename } = req.params;
+  res.sendFile(path.join(__dirname, 'uploads', filename));
+});
+
+const uploadDir = 'uploads';
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+/**
+ * 
+mkdirSync: Node.js의 파일 시스템 모듈에서 제공하는 함수, 디렉토리를 만드는 함수
+fs.mkdirSync 코드를 통해 
+ */
+
+/** null은 에러 없음을 의미한다. 한마디로 밑에 코드에서는 에러 없이 uploads 폴더에 저장해줘라는 의미 */
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+// 위의 코드는 multer를 사용할 때 파일을 서버에 저장하기 위한 설정 객체를 의미한다.
+
+const upload = multer({ storage });
+
+app.post('/postWrite', upload.single('files'), async (req, res) => {
+  try {
+    const { title, summary, content } = req.body;
+    const { token } = req.cookies;
+    if (!token) {
+      return res.status(401).json({ error: '로그인 필요' });
+    }
+
+    const userInfo = jwt.verify(token, secretKey);
+
+    const postData = {
+      title,
+      summary,
+      content,
+      cover: req.file ? req.file.path : null, // 파일 경로 저장
+      author: userInfo.username,
+    };
+
+    await postModel.create(postData);
+    console.log('포스트 등록 성공');
+
+    res.json({ message: '포스트 글쓰기 성공' });
+  } catch (err) {
+    console.log('에러', err);
+    return res.status(500).json({ error: '서버 에러' });
+  }
+});
