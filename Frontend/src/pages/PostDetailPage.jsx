@@ -7,6 +7,7 @@ import { formatDate } from '../utils/features'
 import { useSelector } from 'react-redux'
 
 import LikeButton from '../components/LikeButton'
+import { Comments } from '../components/Comments'
 
 // 상세 페이지 컴포넌트
 export const PostDetailPage = () => {
@@ -75,7 +76,9 @@ export const PostDetailPage = () => {
         <Link to="/">목록으로</Link>
       </section>
 
-      <section className={css.commentlist}>댓글목록</section>
+      <section className={css.commentlist}>
+        <Comments />
+      </section>
     </main>
   )
 }
