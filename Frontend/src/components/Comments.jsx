@@ -2,17 +2,14 @@ import { useSelector } from 'react-redux'
 import css from './comments.module.css'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { createComment, getComments } from '../apis/commentApi'
+import { createComment, getComments, deleteComment } from '../apis/commentApi'
 import { formatDate } from '../utils/features'
 
 export const Comments = ({ postId }) => {
-  console.log('Comments : postId:', postId)
   const userInfo = useSelector(state => state.user.user)
-  console.log('Comments : userInfo:', userInfo)
 
   const [newComment, setNewComment] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  //
   const [comments, setComments] = useState([])
 
   useEffect(() => {
@@ -39,7 +36,6 @@ export const Comments = ({ postId }) => {
     try {
       setIsLoading(true)
 
-      // 댓글 등록 API 호출
       const commentData = {
         content: newComment,
         author: userInfo.username,
@@ -49,7 +45,6 @@ export const Comments = ({ postId }) => {
       const response = await createComment(commentData)
       console.log('댓글 등록 성공:', response)
 
-      // 새 댓글 추가하고 입력창 초기화
       setComments(prevComments => [response, ...prevComments])
       setNewComment('')
 
@@ -60,6 +55,26 @@ export const Comments = ({ postId }) => {
       setIsLoading(false)
     }
   }
+
+  // 댓글 삭제 핸들러
+  const handleDelete = async commentId => {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
+      try {
+        setIsLoading(true)
+        // 댓글 삭제 API 호출
+        const response = await deleteComment(commentId)
+        console.log('댓글 삭제 성공:', response)
+        // 댓글 목록에서 삭제된 댓글 제거
+        setComments(prevComments => prevComments.filter(comment => comment._id !== commentId))
+        setIsLoading(false)
+      } catch (error) {
+        console.error('댓글 삭제 실패:', error)
+        alert('댓글 삭제에 실패했습니다.')
+        setIsLoading(false)
+      }
+    }
+  }
+
   return (
     <section className={css.comments}>
       {userInfo.username ? (
@@ -92,7 +107,7 @@ export const Comments = ({ postId }) => {
               {userInfo.username === comment.author && (
                 <div className={css.btns}>
                   <button>수정</button>
-                  <button>삭제</button>
+                  <button onClick={() => handleDelete(comment._id)}>삭제</button>
                 </div>
               )}
             </li>
@@ -106,4 +121,3 @@ export const Comments = ({ postId }) => {
     </section>
   )
 }
-// Comments 컴포넌트는 게시글 상세 페이지에서 댓글을 작성하고 조회하는 기능을 담당

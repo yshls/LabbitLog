@@ -368,3 +368,19 @@ app.post('/comments', async (req, res) => {
     res.status(500).json({ error: '댓글 작성에 실패했습니다.' });
   }
 });
+
+// 댓 삭제
+app.delete('/comments/:commentId', async (req, res) => {
+  const { commentId } = req.params;
+
+  try {
+    const deletedComment = await commentModel.findByIdAndDelete(commentId);
+    if (!deletedComment) {
+      return res.status(404).json({ error: '댓글을 찾을 수 없습니다.' });
+    }
+    res.json({ message: '댓글이 삭제되었습니다.' });
+  } catch (error) {
+    console.error('댓글 삭제 오류:', error);
+    res.status(500).json({ error: '댓글 삭제에 실패했습니다.' });
+  }
+});
