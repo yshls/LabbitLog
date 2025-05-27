@@ -6,26 +6,25 @@ export default function PostCard({ post }) {
   return (
     <article className={css.postcard}>
       <div className={css.post_img}>
-        <img src={cover} ?`http://localhost:4000/$`
+        <img
+          src={cover ? `http://localhost:4000/${cover}` : 'https://picsum.photos/600/300'}
+          alt=""
+        />
       </div>
-      <h3 className={css.title}>포스트제목이 들어갑니다.</h3>
+      <h3 className={css.title}>{title}</h3>
 
       <div className={css.info}>
         <p>
           <Link to={`/mypage`} className={css.author}>
-            ysh
+            {author}
           </Link>
-          <time className={css.date}>2025.05.05</time>
+          <time className={css.date}>{new Date(createdAt).toLocaleDateString('ko-KR')}</time>
         </p>
         <p>
-          <span>❤️</span> <span>30</span> <span>💬</span> <span>30</span>
+          <span>❤️</span> <span>0</span> <span>💬</span> <span>0</span>
         </p>
       </div>
-      <p className={css.dec}>
-        요약 내용이 들어갑니다. 내용이 길 ~~~ 수 있어요. 요약 내용이 들어갑니다. 내용이 길 ~~~ 수
-        있어요. 요약 내용이 들어갑니다. 내용이 길 ~~~ 수 있어요. 요약 내용이 들어갑니다. 내용이 길
-        ~~~ 수 있어요. 요약 내용이 들어갑니다. 내용이 길 ~~~ 수 있어요
-      </p>
+      <p className={css.dec}>{summary}</p>
     </article>
   )
 }
