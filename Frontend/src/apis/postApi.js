@@ -25,6 +25,12 @@ export const deletePost = async postId => {
   return response.data
 }
 
+// 글 수정 API 추가
+export const updatePost = async (postId, postData) => {
+  const response = await axios.put(`${API_URL}/post/${postId}`, postData)
+  return response.data
+}
+
 // 쪼아요 토글 API 추가
 export const toggleLike = async postId => {
   const response = await axios.post(`${API_URL}/like/${postId}`)

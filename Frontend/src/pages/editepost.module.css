@@ -1,0 +1,74 @@
+.editepost {
+  padding: 0 1rem;
+}
+.editepost h2 h2 {
+  padding-bottom: 2rem;
+}
+.writecon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.writecon > input {
+  padding: 1rem;
+}
+.writecon > * {
+  width: 100%;
+}
+.writecon > textarea {
+  height: 300px;
+}
+
+.writecon > button {
+  padding: 1rem;
+  width: 200px;
+}
+.writecon > p {
+  font-size: 0.75rem;
+  color: red;
+  text-align: right;
+  width: 100%;
+}
+.writecon .smallimg {
+  text-align: left;
+}
+.writecon .smallimg img {
+  width: 100px;
+}
+
+.editorWrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* 버튼 스타일 */
+.writecon button[type='submit'] {
+  margin-bottom: 4rem;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.writecon button[type='submit']:hover {
+  background-color: #45a049;
+}
+
+.writecon button[type='submit']:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* 오류 메시지 스타일 */
+.errorMessage {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 0.5em;
+  margin-bottom: 20px;
+}
