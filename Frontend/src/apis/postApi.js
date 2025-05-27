@@ -24,3 +24,9 @@ export const deletePost = async postId => {
   const response = await axios.delete(`${API_URL}/post/${postId}`)
   return response.data
 }
+
+// 쪼아요 토글 API 추가
+export const toggleLike = async postId => {
+  const response = await axios.post(`${API_URL}/like/${postId}`)
+  return response.data
+}
