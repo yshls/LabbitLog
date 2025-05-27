@@ -18,12 +18,17 @@ export const PostDetailPage = () => {
 
   const [postInfo, setPostInfo] = useState({}) // 상세 정보를 저장할 상태
 
+  // 댓글 수 상태관리
+  const [commentCount, setCommentCount] = useState(0)
+
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
         const data = await getPostDetail(postId) // postId를 이용하여 상세 정보를 가져옵니다.
         console.log(data)
         setPostInfo(data)
+        // 초기 댓글 수 설정(백엔드에서 전달받은 경우)
+        setCommentCount(data.commentCount || 0)
       } catch (error) {
         console.error('상세정보 조회 실패:', error)
       }
@@ -31,6 +36,10 @@ export const PostDetailPage = () => {
     fetchPostDetail()
   }, [postId])
 
+  // 댓글 수를 업데이트하는 함수
+  const updateCommentCount = count => {
+    setCommentCount(count)
+  }
   const handleDeletePost = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
@@ -55,7 +64,10 @@ export const PostDetailPage = () => {
         <div className={css.info}>
           <p className={css.author}>{postInfo?.author}</p>
           <p className={css.date}>{formatDate(postInfo?.updatedAt)}</p>
-          <p>{postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}</p>
+          <p>
+            {postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}{' '}
+            <span style={{ marginLeft: '10px' }}>💬 {commentCount}</span>
+          </p>
         </div>
         <div className={css.summary}>{postInfo?.summary}</div>
         {/* Quill 에디터로 작성된 HTML 콘텐츠를 렌더링 */}
@@ -75,10 +87,12 @@ export const PostDetailPage = () => {
         )}
         <Link to="/">목록으로</Link>
       </section>
-
-      <section className={css.commentlist}>
-        <Comments />
-      </section>
+      {/* 업데이트된 Comments 컴포넌트에 commentCount와 updateCommentCount 함수 전달 */}
+      <Comments
+        postId={postId}
+        commentCount={commentCount}
+        onCommentCountChange={updateCommentCount}
+      />
     </main>
   )
 }

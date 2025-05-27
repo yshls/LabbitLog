@@ -216,9 +216,9 @@ app.post('/postWrite', upload.single('files'), async (req, res) => {
 
     console.log('📤 저장 시도 데이터:', postData);
 
-    const savedPost = await postModel.create(postData); // ✅ 한 번만 저장
+    const savedPost = await postModel.create(postData); //  한 번만 저장
 
-    console.log('✅ 저장 완료:', savedPost);
+    console.log(' 저장 완료:', savedPost);
 
     res.json({ message: '포스트 글쓰기 성공' });
   } catch (err) {
@@ -245,6 +245,18 @@ app.get('/postList', async (req, res) => {
       .skip(skip)
       .limit(limit);
 
+    // 각 포스트 댓글 수 조회
+    const postsWithCommentCounts = await Promise.all(
+      posts.map(async (post) => {
+        const commentCount = await commentModel.countDocuments({
+          postId: post._id,
+        });
+        const postObject = post.toObject();
+        postObject.commentCount = commentCount;
+        return postObject;
+      })
+    );
+
     // 마지막 페이지 여부 확인
     const hasMore = total > skip + posts.length;
 
@@ -268,6 +280,12 @@ app.get('/post/:postId', async (req, res) => {
     if (!post) {
       return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' });
     }
+    // 댓글 수 조회
+    const commentCount = await commentModel.countDocuments({ postId });
+
+    // 응답 객체 생성
+    const postsWithCommentCounts = post.toObject();
+    postsWithCommentCounts.commentCount = commentCount;
     res.json(post);
   } catch (err) {
     console.error('게시물 상세 조회 오류:', err);
