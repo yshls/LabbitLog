@@ -19,3 +19,9 @@ export const deleteComment = async commentId => {
   const response = await axios.delete(`${API_URL}/comment/${commentId}`)
   return response.data
 }
+
+// 댓글 수정 API
+export const updateComment = async (commentId, content) => {
+  const response = await axios.put(`${API_URL}/comments/${commentId}`, { content })
+  return response.data
+}
