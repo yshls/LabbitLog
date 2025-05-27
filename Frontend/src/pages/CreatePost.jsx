@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import QuillEditor from '../components/QuillEditor'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { createPost } from '../apis/postApi'
 
 export const CreatePost = () => {
   const navigate = useNavigate()
@@ -20,6 +21,7 @@ export const CreatePost = () => {
       navigate('/login')
     }
   }, [user, navigate])
+  console.log('user 상태:', user)
 
   const handleContentChange = content => {
     setContent(content)
@@ -50,8 +52,12 @@ export const CreatePost = () => {
       data.set('files', files[0])
     }
 
+    // author 추가
+    data.set('author', user._id)
+
     try {
-      console.log('등록성공')
+      const res = await createPost(data)
+      console.log('등록성공', res)
 
       setIsSubmitting(false)
       navigate('/')

@@ -104,7 +104,7 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ error: '비밀번호가 틀렸습니다.' });
     } else {
       const { _id, email, username } = userDoc;
-      const payload = { id: _id, email };
+      const payload = { id: _id, email, username };
 
       const token = jwt.sign(payload, secretKey, {
         expiresIn: tokenLife,
@@ -199,6 +199,7 @@ app.post('/postWrite', upload.single('files'), async (req, res) => {
   try {
     const { title, summary, content } = req.body;
     const { token } = req.cookies;
+
     if (!token) {
       return res.status(401).json({ error: '로그인 필요' });
     }
@@ -213,12 +214,77 @@ app.post('/postWrite', upload.single('files'), async (req, res) => {
       author: userInfo.username,
     };
 
-    await postModel.create(postData);
-    console.log('포스트 등록 성공');
+    console.log('📤 저장 시도 데이터:', postData);
+
+    const savedPost = await postModel.create(postData); // ✅ 한 번만 저장
+
+    console.log('✅ 저장 완료:', savedPost);
 
     res.json({ message: '포스트 글쓰기 성공' });
   } catch (err) {
     console.log('에러', err);
     return res.status(500).json({ error: '서버 에러' });
+  }
+});
+
+// 글 목록 조회 API - 페이지네이션 추가
+app.get('/postList', async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 0; // 페이지 번호 0부터 시작
+    const limit = parseInt(req.query.limit) || 3; // 한 페이지당 게시물 수 (기본값 3으로 설정함)
+    const skip = page * limit; // 건너뛸 게시물 수
+
+    // 총 게시물 수 조회
+    const total = await postModel.countDocuments();
+    console.log('📄 전체 게시글 수:', total);
+
+    // 페이지네이션 적용하여 게시물 조회
+    const posts = await postModel
+      .find()
+      .sort({ createdAt: -1 }) // 최신순 정렬
+      .skip(skip)
+      .limit(limit);
+
+    // 마지막 페이지 여부 확인
+    const hasMore = total > skip + posts.length;
+
+    res.json({
+      posts,
+      hasMore,
+      total,
+    });
+  } catch (err) {
+    console.error('게시물 조회 오류:', err);
+    res.status(500).json({ error: '게시물 조회에 실패했습니다.' });
+  }
+});
+
+// 글 상세 조회 api
+
+app.get('/post/:postId', async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' });
+    }
+    res.json(post);
+  } catch (err) {
+    console.error('게시물 상세 조회 오류:', err);
+    res.status(500).json({ error: '게시물 상세 조회에 실패했습니다.' });
+  }
+});
+//글 삭제 API
+app.delete('/post/:postId', async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await postModel.findByIdAndDelete(postId);
+    if (!post) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' });
+    }
+    res.json({ message: '게시물이 삭제되었습니다.' });
+  } catch (err) {
+    console.error('게시물 삭제 오류:', err);
+    res.status(500).json({ error: '게시물 삭제에 실패했습니다.' });
   }
 });

@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom'
 import css from './postcard.module.css'
 
-export default function PostCard() {
+export default function PostCard({ post }) {
+  const { title, summary, cover, author, createdAt } = post
   return (
     <article className={css.postcard}>
       <div className={css.post_img}>
-        <img src="https://picsum.photos/600/300" alt="" />
+        <img src={cover} ?`http://localhost:4000/$`
       </div>
       <h3 className={css.title}>포스트제목이 들어갑니다.</h3>
 
       <div className={css.info}>
         <p>
           <Link to={`/mypage`} className={css.author}>
-            somy
+            ysh
           </Link>
           <time className={css.date}>2025.05.05</time>
         </p>

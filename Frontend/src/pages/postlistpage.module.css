@@ -1,3 +1,7 @@
+.postlistpage {
+  min-height: 100vh;
+  padding: 2rem;
+}
 .postList {
   padding: 1rem;
   display: flex;
