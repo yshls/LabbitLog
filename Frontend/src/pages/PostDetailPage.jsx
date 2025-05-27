@@ -1,21 +1,21 @@
+// /detail/:postId 경로로 들어왔을 때 보여지는 페이지입니다.
 import css from './postdetailpage.module.css'
 import { useEffect, useState } from 'react'
-
 import { Link, useParams } from 'react-router-dom'
-// /detail/:postId 경로로 들어왔을 때 보여지는 페이지입니다.
-
 import { getPostDetail, deletePost } from '../apis/postApi'
 import { formatDate } from '../utils/features'
 import { useSelector } from 'react-redux'
 
+import LikeButton from '../components/LikeButton'
+
+// 상세 페이지 컴포넌트
 export const PostDetailPage = () => {
+  const username = useSelector(state => state.user.user.username)
   const { postId } = useParams()
   console.log(postId) // postId는 URL 파라미터로 전달된 값입니다.
   // postId를 이용하여 서버에 요청하여 상세 정보를 가져옵니다.
 
-  const username = useSelector(state => state.user.user.username)
-
-  const [postInfo, setPostInfo] = useState()
+  const [postInfo, setPostInfo] = useState({}) // 상세 정보를 저장할 상태
 
   useEffect(() => {
     const fetchPostDetail = async () => {
@@ -54,9 +54,7 @@ export const PostDetailPage = () => {
         <div className={css.info}>
           <p className={css.author}>{postInfo?.author}</p>
           <p className={css.date}>{formatDate(postInfo?.updatedAt)}</p>
-          <p>
-            <span>❤️</span> <span>30</span>
-          </p>
+          <p>{postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}</p>
         </div>
         <div className={css.summary}>{postInfo?.summary}</div>
         {/* Quill 에디터로 작성된 HTML 콘텐츠를 렌더링 */}
