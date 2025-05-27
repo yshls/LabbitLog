@@ -56,6 +56,8 @@ export const RegisterPage = () => {
   return (
     <main className={css.registerpage}>
       <h2>회원가입</h2>
+      {/* 여기에 메시지를 출력! */}
+      {registerState && <p className={css.error}>{registerState}</p>}
       <form onSubmit={handleSubmit(onSubmit)} className={css.container}>
         <input {...register('name')} placeholder="이름" />
         <strong>{errors.name?.message}</strong>
