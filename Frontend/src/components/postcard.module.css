@@ -51,12 +51,12 @@
   padding: 0 1rem;
 }
 .author {
-  color: dodgerblue;
+  color: #fba12f;
   font-weight: bold;
   padding: 0.25rem 1rem 0.25rem 0;
 }
 .author:hover {
-  color: rgb(1, 75, 148);
+  color: #ff9100;
 }
 
 .date {

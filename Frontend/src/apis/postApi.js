@@ -13,7 +13,6 @@ export const getPostList = async (page = 0, limit = 3) => {
   })
   return response.data
 }
-
 // 글 상세 조회 API
 export const getPostDetail = async postId => {
   const response = await axios.get(`${API_URL}/post/${postId}`)

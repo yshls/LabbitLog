@@ -4,6 +4,7 @@ import { RegisterPage } from '../pages/RegisterPage'
 import { LoginPage } from '../pages/LoginPage'
 import { CreatePost } from '../pages/CreatePost'
 import { PostListPage } from '../pages/PostListPage'
+import { PostDetailPage } from '../pages/PostDetailPage'
 
 export const router = createBrowserRouter([
   {
@@ -16,16 +17,20 @@ export const router = createBrowserRouter([
         element: <PostListPage />,
       },
       {
-        path: '/register',
+        path: 'register',
         element: <RegisterPage />,
       },
       {
-        path: '/login',
+        path: 'login',
         element: <LoginPage />,
       },
       {
-        path: '/createPost',
+        path: 'createPost',
         element: <CreatePost />,
+      },
+      {
+        path: 'detail/:postId',
+        element: <PostDetailPage />,
       },
     ],
   },

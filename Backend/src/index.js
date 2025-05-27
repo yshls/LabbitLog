@@ -274,6 +274,7 @@ app.get('/post/:postId', async (req, res) => {
     res.status(500).json({ error: '게시물 상세 조회에 실패했습니다.' });
   }
 });
+
 //글 삭제 API
 app.delete('/post/:postId', async (req, res) => {
   try {

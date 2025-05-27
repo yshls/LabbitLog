@@ -67,7 +67,7 @@ export const PostDetailPage = () => {
       </section>
 
       <section className={css.btns}>
-        {/* 로그인한 사용자만 글을 수정, 삭제 가능 */}
+        {/* 로그인한 사용자만 글을 수정, 삭제할 수 있습니다. */}
         {username === postInfo?.author && (
           <>
             <Link to={`/edit/${postId}`}>수정</Link>
