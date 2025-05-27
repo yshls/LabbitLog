@@ -21,7 +21,7 @@ export default function PostCard({ postId, likes, className = '' }) {
   useEffect(() => {
     if (userId && likes) {
       //사용자가 로그인한 상태이고, 게시물에 좋아요 배열이 있는 경우
-      const userLiked = likes.inclues(userId)
+      const userLiked = likes.includes(userId)
       setIsLiked(userLiked)
     } else {
       setIsLiked(false)
