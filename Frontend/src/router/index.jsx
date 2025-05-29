@@ -7,6 +7,7 @@ import { PostListPage } from '../pages/PostListPage'
 import { PostDetailPage } from '../pages/PostDetailPage'
 import { EditePost } from '../pages/EditePost'
 import { MyPage } from '../pages/MyPage'
+import { UserInfoUpdate } from '../pages/UserInfoUpdate'
 
 export const router = createBrowserRouter([
   {
@@ -39,8 +40,12 @@ export const router = createBrowserRouter([
         element: <EditePost />,
       },
       {
-        path: 'mypage/:username', // ✅ 여기가 포인트!!
+        path: 'mypage/:username',
         element: <MyPage />,
+      },
+      {
+        path: '/update-profile',
+        element: <UserInfoUpdate />,
       },
     ],
   },

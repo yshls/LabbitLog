@@ -67,8 +67,10 @@ export const MyPage = () => {
             {userData.createdAt ? formatDate(userData.createdAt) : '날짜 없음'}
           </p>
           {isCurrentUser && (
-            <div className={css.editButton}>
-              <Link to={`/mypage/${username}`}>내 정보 수정</Link>
+            <div>
+              <Link to={`/update-profile`} className={css.editButton}>
+                내 정보 수정
+              </Link>
             </div>
           )}
         </div>

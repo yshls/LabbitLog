@@ -66,3 +66,14 @@ export const getUserLikes = async username => {
     throw err
   }
 }
+
+// 사용자 정보 수정
+export const updateUserInfo = async userData => {
+  try {
+    const response = await axios.put(`${API_URL}/user/update`, userData)
+    return response.data
+  } catch (err) {
+    console.error('사용자 정보 수정 실패:', err)
+    throw err
+  }
+}
