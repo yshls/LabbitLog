@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { toggleLike } from '../apis/postApi'
 
 import { useSelector } from 'react-redux'
+import { Toaster, toast } from 'react-hot-toast'
 
 export default function PostCard({ postId, likes, className = '' }) {
   const navigate = useNavigate()
@@ -43,7 +44,7 @@ export default function PostCard({ postId, likes, className = '' }) {
 
       // 로그인이 필요한 경우 로그인 페이지로 이동
       if (error.response && error.response.status === 401) {
-        alert('로그인이 필요합니다.')
+        toast.error('로그인이 필요합니다.')
         navigate('/login')
       }
     }

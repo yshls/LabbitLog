@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getPostDetail, deletePost } from '../apis/postApi'
 import { formatDate } from '../utils/features'
 import { useSelector } from 'react-redux'
+import { Toaster, toast } from 'react-hot-toast'
 
 import LikeButton from '../components/LikeButton'
 import { Comments } from '../components/Comments'
@@ -44,11 +45,11 @@ export const PostDetailPage = () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await deletePost(postId) // postId를 이용하여 글을 삭제합니다.
-        alert('삭제되었습니다.')
+        toast.success('삭제되었습니다.')
         window.location.href = '/' // 삭제 후 목록 페이지로 이동합니다.
       } catch (error) {
         console.error('글 삭제 실패:', error)
-        alert('삭제에 실패했습니다.')
+        toast.error('삭제에 실패했습니다.')
       }
     }
   }

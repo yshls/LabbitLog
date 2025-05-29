@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { createComment, getComments, deleteComment, updateComment } from '../apis/commentApi'
 import { formatDate } from '../utils/features'
 import css from './comments.module.css'
+import { Toaster, toast } from 'react-hot-toast'
 
 //  onCommentCountChange를 props로 받도록 수정
 export const Comments = ({ postId, onCommentCountChange }) => {
@@ -23,7 +24,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
       }
     } catch (error) {
       console.error('댓글 목록 조회 실패:', error)
-      alert('댓글 목록 조회에 실패했습니다.')
+      toast.error('댓글 목록 조회에 실패했습니다.')
     }
   }, [postId, onCommentCountChange])
 
@@ -34,7 +35,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
   const handleSubmit = async e => {
     e.preventDefault()
     if (!newComment.trim()) {
-      alert('댓글을 입력하세요')
+      toast('댓글을 입력하세요')
       return
     }
 
@@ -57,7 +58,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
       }
     } catch (error) {
       console.error('댓글 등록 실패:', error)
-      alert('댓글 등록에 실패했습니다.')
+      toast.error('댓글 등록에 실패했습니다.')
     } finally {
       setIsLoading(false)
     }
@@ -78,7 +79,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
       }
     } catch (error) {
       console.error('댓글 삭제 실패:', error)
-      alert('댓글 삭제에 실패했습니다.')
+      toast.error('댓글 삭제에 실패했습니다.')
     } finally {
       setIsLoading(false)
     }
@@ -94,7 +95,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
 
   const handleUpdateComment = async commentId => {
     if (!editState.content.trim()) {
-      alert('댓글 내용을 입력하세요')
+      toast('댓글 내용을 입력하세요')
       return
     }
 
@@ -110,7 +111,7 @@ export const Comments = ({ postId, onCommentCountChange }) => {
       handleCancelEdit()
     } catch (error) {
       console.error('댓글 수정 실패:', error)
-      alert('댓글 수정에 실패했습니다.')
+      toast.error('댓글 수정에 실패했습니다.')
     } finally {
       setIsLoading(false)
     }

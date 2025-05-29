@@ -4,3 +4,9 @@
   margin: auto;
   position: relative;
 }
+.customToast {
+  background: 'rgba(0, 0, 0, 0.6)';
+  color: '#fff';
+  padding: '12px 16px';
+  borderradius: '50px';
+}
