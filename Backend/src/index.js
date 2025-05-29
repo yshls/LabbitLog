@@ -402,3 +402,77 @@ app.delete('/comments/:commentId', async (req, res) => {
     res.status(500).json({ error: '댓글 삭제에 실패했습니다.' });
   }
 });
+// 사용자 정보 조회 API
+app.get('/user/:username', async (req, res) => {
+  try {
+    const { username } = req.params;
+    console.log('🔍 받은 username:', username); // 👈 여기에 뭔가 보일 거야
+
+    const user = await userModel.findOne({ username }, { password: 0 });
+    console.log('🎯 찾은 사용자:', user);
+
+    if (!user) {
+      return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error('사용자 정보 조회 오류:', err);
+    res.status(500).json({ error: '사용자 정보 조회에 실패했습니다.' });
+  }
+});
+
+// 사용자가 작성한 글 조회 API
+app.get('/user/:username/posts', async (req, res) => {
+  try {
+    const { username } = req.params;
+    const posts = await postModel
+      .find({ author: username })
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (err) {
+    console.error('사용자 게시물 조회 오류:', err);
+    res.status(500).json({ error: '사용자 게시물 조회에 실패했습니다.' });
+  }
+});
+
+// 사용자가 작성한 댓글 조회 API
+app.get('/user/:username/comments', async (req, res) => {
+  try {
+    const { username } = req.params;
+    const comments = await commentModel
+      .find({ author: username })
+      .sort({ createdAt: -1 });
+
+    res.json(comments);
+  } catch (err) {
+    console.error('사용자 댓글 조회 오류:', err);
+    res.status(500).json({ error: '사용자 댓글 조회에 실패했습니다.' });
+  }
+});
+
+// 사용자가 좋아요 클릭한 글 조회 API
+app.get('/user/:username/likes', async (req, res) => {
+  try {
+    const { username } = req.params;
+    // 먼저 사용자 ID 찾기
+    const user = await userModel.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
+    }
+
+    // 사용자가 좋아요한 게시물 찾기
+    const likedPosts = await postModel
+      .find({ likes: user._id })
+      .sort({ createdAt: -1 });
+
+    res.json(likedPosts);
+  } catch (err) {
+    console.error('사용자 좋아요 게시물 조회 오류:', err);
+    res
+      .status(500)
+      .json({ error: '사용자 좋아요 게시물 조회에 실패했습니다.' });
+  }
+});
