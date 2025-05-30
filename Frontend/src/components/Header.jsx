@@ -24,11 +24,7 @@ export const Header = () => {
     const fetchProfile = async () => {
       try {
         const userData = await getUserProfile()
-        if (userData) {
-          dispatch(setUserInfo(userData))
-        } else {
-          dispatch(setUserInfo(''))
-        }
+        dispatch(setUserInfo(userData || ''))
       } catch (err) {
         console.error('프로필 조회 실패:', err)
         dispatch(setUserInfo(''))
@@ -52,16 +48,42 @@ export const Header = () => {
 
   if (isLoading) {
     return (
-      <header className={css.header}>
-        <h1>
-          <Link to="/">LabbitLog</Link>
-        </h1>
-        <div>로딩 중...</div>
-        <div className={css.leftSection}>
-          <Link to="/" className={css.logo}>
+      <>
+        <aside className={css.sidebar}>
+          <div className={css.logo}>
+            <Link to="/">
+              <img src={logo} alt="LabbitLog Logo" />
+            </Link>
+          </div>
+          <nav className={css.nav}>
+            {username && (
+              <>
+                <button onClick={() => setIsModalOpen(true)} className={css.menuBtn}>
+                  <FaPlus />
+                </button>
+                <MenuLike to={`/mypage/${username}`} icon={<RiAccountCircleLine />} />
+              </>
+            )}
+          </nav>
+        </aside>
+
+        <div className={css.topRight}>
+          <span>로딩 중...</span>
+        </div>
+      </>
+    )
+  }
+
+  return (
+    <>
+      {/* 왼쪽 사이드바 */}
+      <aside className={css.sidebar}>
+        <div className={css.logo}>
+          <Link to="/">
             <img src={logo} alt="LabbitLog Logo" />
           </Link>
-
+        </div>
+        <nav className={css.nav}>
           {username && (
             <>
               <button onClick={() => setIsModalOpen(true)} className={css.menuBtn}>
@@ -70,41 +92,22 @@ export const Header = () => {
               <MenuLike to={`/mypage/${username}`} icon={<RiAccountCircleLine />} />
             </>
           )}
-        </div>
-      </header>
-    )
-  }
+        </nav>
+      </aside>
 
-  return (
-    <aside className={css.sidebar}>
-      {/* 로고 */}
-      <div className={css.logo}>
-        <Link to="/">
-          <img src={logo} alt="LabbitLog Logo" />
-        </Link>
-      </div>
-
-      {/* 네비게이션 */}
-      <nav className={css.nav}>
-        {username ? (
-          <>
-            <div className={css.wrapper}>
-              <button onClick={() => setIsModalOpen(true)} className={css.menuBtn}>
-                <FaPlus />
-              </button>
-              <MenuLike to={`/mypage/${username}`} icon={<RiAccountCircleLine />} />
-            </div>
-            <button onClick={handleLogout} className={css.logoutBtn}>
-              로그아웃
-            </button>
-          </>
-        ) : (
+      {/* 오른쪽 상단 */}
+      <div className={css.topRight}>
+        {!username ? (
           <>
             <MenuLike to="/register" label="회원가입" />
             <MenuLike to="/login" label="로그인" className={css.loginBtn} />
           </>
+        ) : (
+          <button onClick={handleLogout} className={css.logoutBtn}>
+            로그아웃
+          </button>
         )}
-      </nav>
+      </div>
 
       {/* 글쓰기 모달 */}
       <Modal
@@ -119,7 +122,7 @@ export const Header = () => {
         </button>
         <CreatePost onClose={() => setIsModalOpen(false)} />
       </Modal>
-    </aside>
+    </>
   )
 }
 
