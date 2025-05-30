@@ -1,0 +1,30 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".gitignore, .prettierignore, .prettierrc, eslint.config.js, package-lock.json, vite.config.js"
+  },
+
+  // 워크스페이스 색상 테마 설정
+  "workbench.colorCustomizations": {
+    // 타이틀 바 (창 상단) 색상 설정
+    "titleBar.activeBackground": "#FF6347", // 토마토 메인 컬러
+    "titleBar.activeForeground": "#FFFFFF",
+    "titleBar.inactiveBackground": "#D84C40", // 어두운 토마토
+    "titleBar.inactiveForeground": "#EEEEEE",
+
+    // 활동 바 (왼쪽 사이드바 아이콘 영역) 색상 설정
+    "activityBar.background": "#D84C40", // 어두운 토마토
+    "activityBar.foreground": "#FFFFFF",
+    "activityBar.inactiveForeground": "#FFD0CB", // 연한 토마토
+    "activityBar.activeBorder": "#FFD700", // 골드 액센트
+    "activityBar.activeBackground": "#FF6347" // 토마토 메인 컬러
+  }
+}
