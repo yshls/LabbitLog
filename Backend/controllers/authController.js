@@ -11,7 +11,7 @@ export const register = async (req, res) => {
     const { name, email, password } = req.body;
 
     // 이메일 중복 확인
-    const existingUser = await userModel.findOne({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({ error: '이미 존재하는 이메일입니다.' });
     }
@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
     // 사용자 저장
-    const userDoc = new userModel({
+    const userDoc = new User({
       username: name,
       email,
       password: hashedPassword,
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const userDoc = await userModel.findOne({ email });
+    const userDoc = await User.findOne({ email });
     if (!userDoc) {
       return res.status(401).json({ error: '없는 사용자 입니다.' });
     }
