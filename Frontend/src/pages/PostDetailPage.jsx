@@ -1,17 +1,25 @@
 // /detail/:postId 경로로 들어왔을 때 보여지는 페이지입니다.
 import css from './postdetailpage.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+
 import { Link, useParams } from 'react-router-dom'
 import { getPostDetail, deletePost } from '../apis/postApi'
 import { formatDate } from '../utils/features'
 import { useSelector } from 'react-redux'
 import { Toaster, toast } from 'react-hot-toast'
+import { TbMessageCircle } from 'react-icons/tb'
+
+import { RiSingleQuotesL } from 'react-icons/ri'
+import { RiSingleQuotesR } from 'react-icons/ri'
 
 import LikeButton from '../components/LikeButton'
 import { Comments } from '../components/Comments'
+import VariableProximity from '../components/VariableProximity'
 
 // 상세 페이지 컴포넌트
 export const PostDetailPage = () => {
+  const containerRef = useRef(null)
+
   const username = useSelector(state => state.user.user.username)
   const { postId } = useParams()
   console.log(postId) // postId는 URL 파라미터로 전달된 값입니다.
@@ -56,22 +64,46 @@ export const PostDetailPage = () => {
 
   return (
     <main className={css.postdetailpage}>
-      <h2>블로그 상세 페이지</h2>
-      <section>
+      <section ref={containerRef}>
+        {/* 제목 */}
+        <h3 className={css.title}>
+          <VariableProximity
+            label={postInfo?.title || ''}
+            containerRef={containerRef}
+            fromFontVariationSettings="'wght' 400, 'opsz' 9"
+            toFontVariationSettings="'wght' 1000, 'opsz' 40"
+            className={css.variableProximityText}
+            radius={100}
+            falloff="linear"
+          />
+        </h3>
+
+        {/* 요약 */}
+        <div className={css.summary}>
+          <RiSingleQuotesL />
+          {postInfo?.summary}
+          <RiSingleQuotesR />
+        </div>
+
+        {/* 이미지 */}
         <div className={css.detailimg}>
           <img src={`${import.meta.env.VITE_BACK_URL}/${postInfo?.cover}`} alt="" />
-          <h3>{postInfo?.title}</h3>
         </div>
+
+        {/* 작성자, 날짜, 좋아요, 댓글 수 */}
         <div className={css.info}>
           <p className={css.author}>{postInfo?.author}</p>
           <p className={css.date}>{formatDate(postInfo?.updatedAt)}</p>
           <p>
-            {postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}{' '}
-            <span style={{ marginLeft: '10px' }}>💬 {commentCount}</span>
+            {postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}
+            <span style={{ marginLeft: '10px' }}>
+              <TbMessageCircle />
+              {commentCount}
+            </span>
           </p>
         </div>
-        <div className={css.summary}>{postInfo?.summary}</div>
-        {/* Quill 에디터로 작성된 HTML 콘텐츠를 렌더링 */}
+
+        {/* 본문 콘텐츠는 info 바깥에 */}
         <div
           className={`${css.content} ql-content`}
           dangerouslySetInnerHTML={{ __html: postInfo?.content }}

@@ -6,7 +6,7 @@
   left: 0;
   width: 90px;
   height: 100vh;
-  border-right: 1px solid #b0b0b0;
+
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -52,24 +52,32 @@ img {
   justify-content: center;
 }
 
-svg {
+.sidebar svg {
   display: block; /* inline-block → block으로 변경 */
   margin: auto; /* 가운데 정렬 */
   width: 30px;
   height: 30px;
   box-sizing: content-box;
   padding: 0.5rem;
-  color: #5a5a5a;
-  border-radius: 8px;
+  color: #888;
+  border-radius: 10px;
   transition: background-color 0.2s ease-in-out;
 }
 
 /* display: block + margin: auto는 가장 깔끔한 가운데 정렬 방식 */
 
-svg:hover {
+.sidebar svg:hover {
   background-color: #fba32fa5;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 0.5rem;
   color: #2d2d2d;
+}
+
+.logoutBtn {
+  border-radius: 10px;
+  color: #3aae2d;
+  width: 70px;
+  padding: 0.3rem;
+  background-color: #a5d0a034;
 }

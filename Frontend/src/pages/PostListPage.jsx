@@ -2,8 +2,10 @@ import css from './postlistpage.module.css'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import PostCard from '../components/PostCard'
 import { getPostList } from '../apis/postApi'
+import { Search } from '../components/Search'
 
 export const PostListPage = () => {
+  const [searchTerm, setSearchTerm] = useState('')
   const [postList, setPostList] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -13,6 +15,15 @@ export const PostListPage = () => {
   const [hasMore, setHasMore] = useState(true)
   const listRef = useRef(null)
   const observer = useRef()
+
+  const handleSearchChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  // 검색 필터 적용
+  const filteredPosts = postList.filter(post =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   // 마지막 게시물 요소를 감지하는 ref 콜백
   const lastPostElementRef = useCallback(
@@ -61,17 +72,22 @@ export const PostListPage = () => {
 
   return (
     <main className={css.postlistpage}>
-      <h2>글목록</h2>
+      {/* 검색바 추가 */}
+      <Search value={searchTerm} onChange={handleSearchChange} />
+
+      {/* 에러 메시지 */}
       {error && <p className={css.errorMessage}>{error}</p>}
+
+      {/* 로딩 & 게시물 없음 */}
       {isLoading && page === 0 ? (
         <p>로딩중...</p>
-      ) : postList.length === 0 ? (
+      ) : filteredPosts.length === 0 ? (
         <p className={css.noPostMessage}>첫번째 글의 주인공이 되어주세요</p>
       ) : (
-        // ref
+        // 게시물 리스트 렌더링
         <ul className={css.postList} ref={listRef}>
-          {postList.map((post, i) => (
-            <li key={post._id} ref={i === postList.length - 1 ? lastPostElementRef : null}>
+          {filteredPosts.map((post, i) => (
+            <li key={post._id} ref={i === filteredPosts.length - 1 ? lastPostElementRef : null}>
               <PostCard post={post} />
             </li>
           ))}

@@ -69,7 +69,7 @@ export const MyPage = () => {
           {isCurrentUser && (
             <div>
               <Link to={`/update-profile`} className={css.editButton}>
-                내 정보 수정
+                비밀번호 변경
               </Link>
             </div>
           )}

@@ -1,0 +1,32 @@
+.searchbar {
+  margin: 20px 0px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  width: 600px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.searchbar:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+  color: #888;
+  font-size: 1rem;
+}
+
+input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding-left: 0.5rem;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #222;
+}
