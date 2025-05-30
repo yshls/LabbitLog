@@ -9,6 +9,8 @@ import { loginUser } from '../apis/userApi.js'
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../store/userSlice'
 
+import KakaoLoginButton from '../components/KakaoLoginButton'
+
 // yup 스키마
 const schema = yup.object({
   email: yup.string().required('이메일을 입력해주세요').email('이메일 형식이 아닙니다'),
@@ -62,6 +64,11 @@ export const LoginPage = () => {
 
         <button type="submit">로그인</button>
       </form>
+      {/* 소셜 로그인 섹션 추가 */}
+      <div className={css.socialLogin}>
+        <p>소셜 계정으로 로그인</p>
+        <KakaoLoginButton />
+      </div>
     </main>
   )
 }

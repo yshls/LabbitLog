@@ -76,6 +76,11 @@ export const RegisterPage = () => {
         <strong>{errors.confirmPassword?.message}</strong>
         <button type="submit">가입하기</button>
       </form>
+      {/* 소셜 로그인 섹션 추가 */}
+      <div className={css.socialLogin}>
+        <p>소셜 계정으로 로그인</p>
+        <KakaoLoginButton />
+      </div>
     </main>
   )
 }
