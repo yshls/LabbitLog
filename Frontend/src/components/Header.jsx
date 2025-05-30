@@ -5,8 +5,13 @@ import { useEffect, useState } from 'react'
 import { setUserInfo } from '../store/userSlice'
 import { getUserProfile, logoutUser } from '../apis/userApi'
 import logo from '../assets/logo.gif'
+import Modal from 'react-modal'
+import { CreatePost } from '../pages/CreatePost'
+
+Modal.setAppElement('#root') // 접근성 설정 (최상단 DOM)
 
 export const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
   const username = user?.username
@@ -57,34 +62,57 @@ export const Header = () => {
 
   return (
     <aside className={css.sidebar}>
-      <h1 className={css.logo}>
+      <div className={css.logo}>
         <Link to="/">
           <img src={logo} alt="LabbitLog Logo" />
         </Link>
-      </h1>
+      </div>
       {isLoading ? (
         <p>로딩 중...</p>
       ) : (
         <nav className={css.nav}>
           {username ? (
             <>
-              <MenuLike to="/createPost" label="글쓰기" />
-              <MenuLike
-                to={`/mypage/${username}`}
-                label="마이페이지"
-                icon={
+              <div className="wrapper">
+                <button onClick={() => setIsModalOpen(true)} className={css.menuBtn}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-6"
+                    class="size-6"
+                    style={{ display: 'block' }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
                   </svg>
-                }
-              />
+                </button>
+                <MenuLike
+                  to={`/mypage/${username}`}
+                  icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      width="40"
+                      height="40"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                      />
+                    </svg>
+                  }
+                />
+              </div>
+
               <button onClick={handleLogout} className={css.logoutBtn}>
                 로그아웃
               </button>
@@ -97,12 +125,28 @@ export const Header = () => {
           )}
         </nav>
       )}
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="글쓰기 모달"
+        className={css.modal}
+        overlayClassName={css.overlay}
+      >
+        <button onClick={() => setIsModalOpen(false)} className={css.closeBtn}>
+          ✕
+        </button>
+        <CreatePost onClose={() => setIsModalOpen(false)} />
+      </Modal>
     </aside>
   )
 }
 
-const MenuLike = ({ to, label }) => (
+const MenuLike = ({ to, label, icon }) => (
   <NavLink to={to} className={({ isActive }) => (isActive ? css.active : '')}>
-    {label}
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      {icon && <span>{icon}</span>}
+      <span>{label}</span>
+    </div>
   </NavLink>
 )
