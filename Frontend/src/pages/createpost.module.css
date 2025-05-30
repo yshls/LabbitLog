@@ -1,7 +1,7 @@
 /* 전체 글쓰기 영역 */
 .createpost {
   width: 100%;
-  max-width: 640px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 2rem 1rem;
   display: flex;

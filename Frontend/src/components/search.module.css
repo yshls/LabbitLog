@@ -1,7 +1,8 @@
 .searchbar {
-  margin: 20px 0px;
+  margin: 20px auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(6px);
   border: 1px solid #ddd;
