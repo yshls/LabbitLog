@@ -9,22 +9,22 @@
   padding: 0.5rem 1rem;
   width: 600px;
   transition: box-shadow 0.3s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .searchbar:hover {
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid #888;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
 .icon {
   color: #888;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
-input {
+.searchbar input {
   border: none;
-  background: transparent;
   outline: none;
+  background: transparent;
   padding-left: 0.5rem;
   width: 100%;
   font-size: 0.9rem;
