@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setUserInfo } from '../store/userSlice'
 import { getUserProfile, logoutUser } from '../apis/userApi'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.gif'
 
 export const Header = () => {
   const dispatch = useDispatch()
