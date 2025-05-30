@@ -1,1 +1,5 @@
-
+.loginLogo {
+  width: 200px;
+  height: auto; /* 원래 비율 유지 */
+  display: block; /* inline 여백 제거 */
+}

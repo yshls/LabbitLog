@@ -8,6 +8,7 @@ import { loginUser } from '../apis/userApi.js'
 
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../store/userSlice'
+import logoFull from '../assets/logo-full.png'
 
 import KakaoLoginButton from '../components/KakaoLoginButton'
 
@@ -53,6 +54,7 @@ export const LoginPage = () => {
 
   return (
     <main className={css.loginpage}>
+      <img src={logoFull} alt="로고" className={css.loginLogo} />
       <h2>로그인</h2>
       {loginError && <strong>{loginError}</strong>}
       <form className={css.container} onSubmit={handleSubmit(onSubmit)}>
