@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toggleLike } from '../apis/postApi'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import './likebutton.css'
 import { IoIosHeartEmpty } from 'react-icons/io'
 import { IoHeart } from 'react-icons/io5'
+import party from 'party-js'
 
 export default function LikeButton({ postId, likes, className = '' }) {
   const navigate = useNavigate()
@@ -14,7 +15,7 @@ export default function LikeButton({ postId, likes, className = '' }) {
 
   const [isLiked, setIsLiked] = useState(false)
   const [likesCount, setLikesCount] = useState(likes ? likes.length : 0)
-  const [pop, setPop] = useState(false)
+  const heartRef = useRef()
 
   useEffect(() => {
     if (userId && likes) {
@@ -30,8 +31,15 @@ export default function LikeButton({ postId, likes, className = '' }) {
       const updatedPost = await toggleLike(postId)
       setIsLiked(!isLiked)
       setLikesCount(updatedPost.likes.length)
-      setPop(true)
-      setTimeout(() => setPop(false), 300)
+
+      // 🎉 하트 주변에 confetti 효과 터뜨리기
+      if (heartRef.current) {
+        party.confetti(heartRef.current, {
+          count: 11,
+
+          spread: 5,
+        })
+      }
     } catch (error) {
       console.error('좋아요 토글 실패:', error)
       if (error.response?.status === 401) {
@@ -44,9 +52,9 @@ export default function LikeButton({ postId, likes, className = '' }) {
   return (
     <span className={className}>
       <span
+        ref={heartRef}
         onClick={handleLikeToggle}
         style={{ cursor: 'pointer', display: 'inline-block' }}
-        className={pop ? 'pop' : ''}
       >
         {isLiked ? <IoHeart /> : <IoIosHeartEmpty />}
       </span>
