@@ -1,5 +1,138 @@
+.fullscreenWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #fff; /* 또는 밝은 배경색 */
+  z-index: 9999; /* 다른 모든 요소 위에 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginpage {
+  display: flex;
+  width: 850px;
+  height: 540px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fffdf8;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #888;
+}
+
+/* 왼쪽 섹션 */
+.leftSection {
+  flex: 1;
+  background-color: #c2c2c2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  gap: 1.5rem;
+  color: #444;
+}
+
+.leftSection h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fba12f;
+}
+
+.leftSection p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* 오른쪽 섹션 */
+.rightSection {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.rightSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+/* 로고 이미지 */
 .loginLogo {
-  width: 200px;
-  height: auto; /* 원래 비율 유지 */
-  display: block; /* inline 여백 제거 */
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 입력 폼 */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.container input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.container input:focus {
+  border-color: #fba12f;
+  box-shadow: 0 0 0 3px rgba(251, 161, 47, 0.2);
+}
+
+.container strong {
+  font-size: 0.8rem;
+  color: #e74c3c;
+}
+
+/* 로그인 버튼 */
+.container button {
+  padding: 0.9rem;
+  background-color: #fba12f;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.container button:hover {
+  background-color: #e59a28;
+}
+
+/* 소셜 로그인 영역 */
+.socialLogin {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.socialLogin p {
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.85rem;
 }

@@ -80,7 +80,7 @@ export const CreatePost = ({ onClose }) => {
 
   return (
     <main className={css.createpost}>
-      <h2 className="post-title">새 포스트 작성하기</h2>
+      <h2 className={css.postTitle}>새 포스트 작성하기</h2>
       {/* 에러 메시지 표시 */}
       {error && <div className={css.error}>{error}</div>}
 

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import PostCard from '../components/PostCard'
 import { getPostList } from '../apis/postApi'
 import { Search } from '../components/Search'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 export const PostListPage = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -80,7 +81,7 @@ export const PostListPage = () => {
 
       {/* 로딩 & 게시물 없음 */}
       {isLoading && page === 0 ? (
-        <p>로딩중...</p>
+        <LoadingSpinner />
       ) : filteredPosts.length === 0 ? (
         <p className={css.noPostMessage}>첫번째 글의 주인공이 되어주세요</p>
       ) : (

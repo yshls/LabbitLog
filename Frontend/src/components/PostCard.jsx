@@ -19,7 +19,6 @@ export default function PostCard({ post }) {
     <article className={css.postcard} onClick={goDetail}>
       <div className={css.text}>
         <h3 className={css.title}>{post.title}</h3>
-        <p className={css.summary}>{post.summary}</p>
         <div className={css.info}>
           <p>
             <Link to={`/mypage/${post.author}`} onClick={handleAuthorClick} className={css.author}>
@@ -29,6 +28,7 @@ export default function PostCard({ post }) {
             <LikeButton postId={post._id} initialLikes={post.likes} />
             <span>💬</span> <span>{post.commentCount || 0}</span>
           </p>
+          <p className={css.summary}>{post.summary}</p>
         </div>
       </div>
       <div className={css.thumbnail}>

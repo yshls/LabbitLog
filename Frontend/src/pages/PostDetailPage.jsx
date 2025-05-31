@@ -66,7 +66,7 @@ export const PostDetailPage = () => {
     <main className={css.postdetailpage}>
       <section ref={containerRef}>
         {/* 제목 */}
-        <h3 className={css.title}>
+        <h1 className={css.title}>
           <VariableProximity
             label={postInfo?.title || ''}
             containerRef={containerRef}
@@ -76,7 +76,7 @@ export const PostDetailPage = () => {
             radius={100}
             falloff="linear"
           />
-        </h3>
+        </h1>
 
         {/* 요약 */}
         <div className={css.summary}>
@@ -85,22 +85,26 @@ export const PostDetailPage = () => {
           <RiSingleQuotesR />
         </div>
 
+        {/* 작성자, 날짜, 좋아요, 댓글 수 */}
+        <div className={css.info}>
+          <div className={css.between}>
+            <p className={css.author}>{postInfo?.author}</p>
+            <p className={css.date}>{formatDate(postInfo?.updatedAt)}</p>
+          </div>
+          <div className={css.between}>
+            <p>
+              {postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}
+              <span style={{ marginLeft: '10px' }}>
+                <TbMessageCircle />
+                {commentCount}
+              </span>
+            </p>
+          </div>
+        </div>
+
         {/* 이미지 */}
         <div className={css.detailimg}>
           <img src={`${import.meta.env.VITE_BACK_URL}/${postInfo?.cover}`} alt="" />
-        </div>
-
-        {/* 작성자, 날짜, 좋아요, 댓글 수 */}
-        <div className={css.info}>
-          <p className={css.author}>{postInfo?.author}</p>
-          <p className={css.date}>{formatDate(postInfo?.updatedAt)}</p>
-          <p>
-            {postInfo && <LikeButton postId={postId} likes={postInfo.likes} />}
-            <span style={{ marginLeft: '10px' }}>
-              <TbMessageCircle />
-              {commentCount}
-            </span>
-          </p>
         </div>
 
         {/* 본문 콘텐츠는 info 바깥에 */}

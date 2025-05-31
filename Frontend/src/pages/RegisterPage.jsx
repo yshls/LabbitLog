@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../apis/userApi'
 
+import KakaoLoginButton from '../components/KakaoLoginButton'
+
 const schema = yup.object({
   name: yup.string().required('이름을 입력해주세요').max(20, '20자 이하로 입력해주세요'),
   email: yup.string().required('이메일을 입력해주세요').email('이메일 형식이 아닙니다'),

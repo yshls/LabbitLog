@@ -1,6 +1,5 @@
 import spinner from '../assets/spinner.gif'
-import css from './LoadingSpinner.module.css' // 스타일 분리하고 싶으면
-
+import css from './LoadingSpinner.module.css'
 export default function LoadingSpinner() {
   return (
     <div className={css.spinnerWrapper}>

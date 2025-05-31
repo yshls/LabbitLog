@@ -1,17 +1,29 @@
 /* 전체 글쓰기 영역 */
 .createpost {
+  height: 500px;
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   background-color: #fff;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+
+  border: 1px solid red;
+}
+
+.createpost::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 /* 제목 */
 .postTitle {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   margin: 0;
@@ -23,7 +35,7 @@
 .writecon {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   margin-top: 2rem;
 }
 
@@ -31,7 +43,7 @@
 label {
   font-weight: 600;
   font-size: 1rem;
-  margin-bottom: 0.3rem;
+  margin-top: 0.5rem;
   display: block;
 }
 
