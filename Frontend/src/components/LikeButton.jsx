@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 import { toggleLike } from '../apis/postApi'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
-import './likebutton.css' // pop 클래스 있는 곳
+import './likebutton.css'
+import { IoIosHeartEmpty } from 'react-icons/io'
+import { IoHeart } from 'react-icons/io5'
 
 export default function LikeButton({ postId, likes, className = '' }) {
   const navigate = useNavigate()
@@ -46,7 +48,7 @@ export default function LikeButton({ postId, likes, className = '' }) {
         style={{ cursor: 'pointer', display: 'inline-block' }}
         className={pop ? 'pop' : ''}
       >
-        {isLiked ? '❤️' : '🤍'}
+        {isLiked ? <IoHeart /> : <IoIosHeartEmpty />}
       </span>
       <span>{likesCount}</span>
     </span>

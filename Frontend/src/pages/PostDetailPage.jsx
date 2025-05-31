@@ -1,6 +1,8 @@
 // /detail/:postId 경로로 들어왔을 때 보여지는 페이지입니다.
 import css from './postdetailpage.module.css'
 import { useEffect, useState, useRef } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
+import { FaRegFileAlt } from 'react-icons/fa'
 
 import { Link, useParams } from 'react-router-dom'
 import { getPostDetail, deletePost } from '../apis/postApi'
@@ -15,6 +17,8 @@ import { RiSingleQuotesR } from 'react-icons/ri'
 import LikeButton from '../components/LikeButton'
 import { Comments } from '../components/Comments'
 import VariableProximity from '../components/VariableProximity'
+
+import { FaEdit } from 'react-icons/fa'
 
 // 상세 페이지 컴포넌트
 export const PostDetailPage = () => {
@@ -117,12 +121,23 @@ export const PostDetailPage = () => {
       <section className={css.btns}>
         {/* 로그인한 사용자만 글을 수정, 삭제할 수 있습니다. */}
         {username === postInfo?.author && (
-          <>
-            <Link to={`/edit/${postId}`}>수정</Link>
-            <span onClick={handleDeletePost}>삭제</span>
-          </>
+          <div className={css.btnGroup}>
+            <Link to={`/edit/${postId}`}>
+              <FaEdit />
+              수정
+            </Link>
+            <span onClick={handleDeletePost}>
+              <FaTrashAlt />
+              삭제
+            </span>
+          </div>
         )}
-        <Link to="/">목록으로</Link>
+        <div className={css.btnGroup}>
+          <Link to="/">
+            <FaRegFileAlt />
+            전체 글 보기
+          </Link>
+        </div>
       </section>
       {/* 업데이트된 Comments 컴포넌트에 commentCount와 updateCommentCount 함수 전달 */}
       <Comments

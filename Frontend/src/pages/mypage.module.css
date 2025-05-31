@@ -1,9 +1,9 @@
 :root {
   --bg-main: #f5f5f5;
   --bg-card: #ffffff;
-  --text-dark: #111;
+  --text-dark: #242424;
   --text-light: #555;
-  --primary: #1d9bf0;
+  --primary: #fba12f;
   --accent: #fba12f;
   --border: #e3e3e3;
   --radius: 12px;
@@ -59,7 +59,7 @@
   transition: background 0.2s;
 }
 .editButton:hover {
-  background-color: #147cc0;
+  background-color: #fba12f;
 }
 
 /* 타임라인 스타일 */

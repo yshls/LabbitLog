@@ -98,42 +98,55 @@
 
 /* 본문 */
 .content {
-  padding: 2rem 1.5rem;
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 /* 수정/삭제/목록 */
+/* 버튼 묶음 컨테이너 */ /* 버튼 래퍼: 왼쪽/오른쪽 정렬 */
 .btns {
   display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  border-top: 1px solid #ddd;
-  padding: 1.5rem 0;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding: 1rem 0;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #eee;
 }
 
+/* 버튼 그룹 */
+.btnGroup {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* 공통 버튼 스타일 */
 .btns a,
 .btns span {
-  background-color: white;
-  border: 1px solid var(--primary);
-  color: var(--primary);
-  padding: 0.7rem 1.4rem;
-  border-radius: 100px;
-  font-weight: 500;
-  font-size: 0.85rem;
-  transition: all 0.2s;
+  color: #6b6b6b;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  min-width: 95px;
   cursor: pointer;
 }
+
 .btns a:hover,
 .btns span:hover {
-  background-color: var(--primary);
-  color: white;
+  text-decoration: underline;
+  text-decoration-thickness: 5px;
+  text-underline-offset: -3px;
+  text-decoration-color: rgba(251, 163, 47, 0.674);
 }
 
 /* 댓글 */
 .commentlist {
-  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  margin: 2rem;
   background: #fff;
   padding: 1rem 1.2rem;
   border-radius: var(--radius);
