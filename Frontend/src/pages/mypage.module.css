@@ -10,19 +10,19 @@
 }
 
 .userpage {
-  background-color: var(--bg-main);
+  background-color: var(--bg-card);
   color: var(--text-dark);
-  padding: 1.5rem 1rem; /* 기존 3rem → 1.5rem */
+  padding: 1rem 1rem;
   font-family: 'Pretendard', sans-serif;
   max-width: 720px;
   margin: 0 auto;
-  border: 1px solid black;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .userpage h2 {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+
   border-bottom: none;
   color: var(--primary);
 }
