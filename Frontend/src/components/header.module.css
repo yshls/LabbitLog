@@ -39,10 +39,12 @@
 }
 
 .topRight {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+  position: fixed; /* 오른쪽 상단 고정 */
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 .nav a {
@@ -95,13 +97,15 @@
 
 .loginBtn,
 .logoutBtn {
-  border-radius: 20px;
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
   color: #3aae2d;
-  width: 90px;
-  padding: 0.5rem;
   background-color: #a5d0a034;
-  cursor: pointer;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .loginBtn:hover,

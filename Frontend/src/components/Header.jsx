@@ -98,9 +98,9 @@ export const Header = () => {
       {/* 오른쪽 상단 */}
       <div className={css.topRight}>
         {!username ? (
-          <>
+          <div className={css.topRight}>
             <MenuLike to="/login" label="로그인" className={css.loginBtn} />
-          </>
+          </div>
         ) : (
           <button onClick={handleLogout} className={css.logoutBtn}>
             로그아웃
