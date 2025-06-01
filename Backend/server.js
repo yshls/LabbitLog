@@ -25,7 +25,7 @@ import { errorHandler } from './utils/errorHandler.js';
 import { User } from './models/User.js'; // ➋ User 모델 import
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(
@@ -107,4 +107,4 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-export default app;
+console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
