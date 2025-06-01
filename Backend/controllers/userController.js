@@ -77,17 +77,13 @@ export const updateUser = async (req, res) => {
     const { password } = req.body;
     const updateData = {};
 
-    // 비밀번호 변경이 있는 경우 해싱
     if (password) {
       updateData.password = bcrypt.hashSync(password, saltRounds);
     }
 
-    // 다른 필드들도 업데이트 가능하도록 확장 가능
-
     const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
       new: true,
-      select: '-password',
-    });
+    }).select('-password');
 
     res.json({
       message: '사용자 정보가 수정되었습니다.',

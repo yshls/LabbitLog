@@ -1,4 +1,5 @@
-// server.js (계속)
+// server.js
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -7,18 +8,21 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose'; // ➊ mongoose import
 
 // 라우트 가져오기
 import authRoutes from './routes/authRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import kakaoAuthRoutes from './routes/kakaoAuthRoutes.js'; // 이미 추가한 카카오 라우트
 
 // 데이터베이스 연결
 import connectDB from './config/db.js';
 
 // 에러 핸들러
 import { errorHandler } from './utils/errorHandler.js';
+import { User } from './models/User.js'; // ➋ User 모델 import
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -48,14 +52,35 @@ app.get('/uploads/:filename', (req, res) => {
   res.sendFile(path.join(__dirname, 'uploads', filename));
 });
 
-// 데이터베이스 연결
-connectDB();
+// ─── 데이터베이스 연결 ────────────────────────────────────────────────────────
+connectDB() // ➌ 몽고 연결 시작
+  .then(() => {
+    // mongoose.connection.readyState가 1(DB 연결됨)을 의미
+    mongoose.connection.once('open', async () => {
+      try {
+        console.log('>> MongoDB 연결됨, 이제 인덱스 삭제 시도');
+        // users 컬렉션에 남아 있는 email_1 인덱스를 삭제
+        await User.collection.dropIndex('email_1');
+        console.log('>> email_1 인덱스가 삭제되었습니다.');
+      } catch (err) {
+        // 인덱스가 없거나 이미 삭제된 경우 에러가 날 수 있음
+        console.error('인덱스 삭제 중 에러:', err.message);
+      }
+    });
+  })
+  .catch((err) => {
+    console.error('DB 연결 실패:', err);
+    process.exit(1);
+  });
+// ────────────────────────────────────────────────────────────────────────────────
 
-// 라우트 설정
+// ─── 라우트 설정 ──────────────────────────────────────────────────────────────
 app.use('/auth', authRoutes); // /auth/register, /auth/login 등
-app.use('/posts', postRoutes); // /posts, /posts/:postId 등
-app.use('/comments', commentRoutes); // /comments, /comments/:postId 등
-app.use('/users', userRoutes); // /users/:username, /users/update 등
+app.use('/auth/kakao', kakaoAuthRoutes);
+app.use('/posts', postRoutes);
+app.use('/comments', commentRoutes);
+app.use('/users', userRoutes);
+// ────────────────────────────────────────────────────────────────────────────────
 
 // 404 처리 - 정의되지 않은 경로에 대한 처리
 app.use((req, res) => {
@@ -81,11 +106,5 @@ process.on('uncaughtException', (err) => {
   console.error('예기치 않은 에러:', err);
   process.exit(1);
 });
-
-// server.js 파일 수정
-import kakaoAuthRoutes from './routes/kakaoAuthRoutes.js';
-
-// 기존 라우트 설정 밑에 추가
-app.use('/auth/kakao', kakaoAuthRoutes);
 
 export default app;

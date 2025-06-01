@@ -66,6 +66,9 @@ export const MyPage = () => {
             <strong>가입일:</strong>{' '}
             {userData.createdAt ? formatDate(userData.createdAt) : '날짜 없음'}
           </p>
+          <p>
+            <strong>최근 수정일:</strong> {formatDate(userData.updatedAt)}
+          </p>
           {isCurrentUser && (
             <div>
               <Link to={`/update-profile`} className={css.editButton}>
