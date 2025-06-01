@@ -36,6 +36,7 @@ export const RegisterPage = () => {
   const navigate = useNavigate()
 
   const onSubmit = async data => {
+    console.log('제출된 값:', data)
     // try catch는 왜 작성하는지?
     // try catch는 에러가 발생했을 때, 에러를 잡아서 처리하기 위해 작성합니다.
     try {
