@@ -22,14 +22,15 @@
 .userpage h2 {
   font-size: 2rem;
   font-weight: bold;
-
+  padding: 0px;
+  margin-bottom: 10px;
   border-bottom: none;
   color: var(--primary);
 }
 
 .userpage h3 {
   font-size: 1.2rem;
-  margin: 2rem 0 1rem;
+  margin: 0rem 0 1rem;
   color: var(--text-dark);
   font-weight: 600;
 }
@@ -40,26 +41,46 @@
 }
 
 .userInfo {
-  background: none;
-  padding: 0;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.userInfo .label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-right: 0.5rem;
+}
+
+.userInfo .value {
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.userInfoRow {
+  display: flex;
+  align-items: baseline;
 }
 
 .editButton {
   background-color: var(--primary);
   color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
   font-weight: 600;
-  display: inline-block;
-  margin-top: 0.8rem;
-  transition: background 0.2s;
+  font-size: 0.95rem;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
+
 .editButton:hover {
-  background-color: #fba12f;
+  background-color: #f88a2b;
 }
 
 /* 타임라인 스타일 */
@@ -77,6 +98,13 @@
   padding: 1rem 1.2rem;
   border-radius: var(--radius);
   transition: box-shadow 0.2s;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .postCard:hover,
