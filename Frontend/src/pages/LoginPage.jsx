@@ -71,7 +71,7 @@ export const LoginPage = () => {
         </div>
 
         <div className={css.rightSection}>
-          <h2>Log in</h2>
+          <h2>로그인</h2>
           {loginError && <strong className={css.error}>{loginError}</strong>}
           <form className={css.container} onSubmit={handleSubmit(onSubmit)}>
             <input {...register('email')} placeholder="이메일" />
