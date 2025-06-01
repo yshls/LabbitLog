@@ -41,15 +41,11 @@ export const LoginPage = () => {
     try {
       const res = await loginUser(data)
 
-      if (res.email && res.username) {
-        dispatch(setUserInfo({ username: res.username, email: res.email }))
-        navigate('/')
-      } else {
-        setLoginError('로그인 실패: 아이디 또는 비밀번호를 확인하세요')
-      }
+      // 무조건 로그인 성공했으면 홈으로 이동
+      navigate('/')
     } catch (err) {
       console.error(err)
-      setLoginError('서버 오류가 발생했습니다')
+      setLoginError('로그인 실패: 아이디 또는 비밀번호를 확인하세요')
     }
   }
 
