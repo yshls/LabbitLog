@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
 
-  background-color: #fff; /* 또는 밝은 배경색 */
+  background-color: #fff;
   z-index: 9999; /* 다른 모든 요소 위에 */
   display: flex;
   justify-content: center;
@@ -13,6 +13,7 @@
 }
 
 .loginpage {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   display: flex;
   width: 850px;
   height: 540px;
@@ -23,34 +24,40 @@
   background: #fffdf8;
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid #888;
 }
 
 /* 왼쪽 섹션 */
 .leftSection {
   flex: 1;
-  background-color: #c2c2c2;
+  background-color: #fefce3;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 2.5rem;
   gap: 1.5rem;
-  color: #444;
+  color: #242424;
+  position: relative;
 }
 
-.leftSection h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin: 0;
-  color: #fba12f;
+.leftSection h3 {
+  padding-top: 20px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-align: left;
+  line-height: 1.5;
 }
 
+/* 회원가입 문구 */
 .leftSection p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #666;
 }
 
+.leftSection p a strong:hover {
+  text-decoration: underline;
+  color: #242424;
+}
 /* 오른쪽 섹션 */
 .rightSection {
   flex: 1;
@@ -70,7 +77,7 @@
 
 /* 로고 이미지 */
 .loginLogo {
-  width: 180px;
+  width: 300px;
   height: auto;
   object-fit: contain;
 }
@@ -106,7 +113,7 @@
 
 /* 로그인 버튼 */
 .container button {
-  padding: 0.9rem;
+  padding: 0.6rem;
   background-color: #fba12f;
   color: #fff;
   border: none;
@@ -118,7 +125,7 @@
 }
 
 .container button:hover {
-  background-color: #e59a28;
+  background-color: #f57c00;
 }
 
 /* 소셜 로그인 영역 */

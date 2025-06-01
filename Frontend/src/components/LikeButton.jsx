@@ -50,7 +50,7 @@ export default function LikeButton({ postId, likes, className = '' }) {
   }
 
   return (
-    <span className={className}>
+    <span className={`${className} likeWrapper`}>
       <span
         ref={heartRef}
         onClick={handleLikeToggle}

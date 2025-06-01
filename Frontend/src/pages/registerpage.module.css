@@ -1,37 +1,111 @@
-.container {
-  width: calc(100% - 2em);
-  margin: auto;
+/* 전체 화면을 덮는 배경 */
+.fullscreenWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden; /* 스크롤 방지 */
+}
 
+/* 가운데 네모 박스 */
+.registerpage {
+  width: 500px;
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  align-items: center;
+  gap: 1rem;
+
+  /* 넌 중앙에 와랏! */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 제목 */
+.registerpage h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+/* 에러 메시지 */
+.error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* 입력 폼 */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
 }
 
 .container input {
-  padding: 1em;
-  border-radius: 0.25em;
-  border: 1px solid #fba12f;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fdfdfd;
+  font-size: 0.95rem;
   outline: none;
-  border-radius: 8px;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .container input:focus {
   border-color: #fba12f;
-  box-shadow: 0 0 0 3px rgba(251, 161, 47, 0.3); /* 포커스 시 하이라이트 */
+  box-shadow: 0 0 0 3px rgba(251, 161, 47, 0.3);
 }
 
+/* 오류 메시지 텍스트 */
 .container strong {
-  font-weight: normal;
   font-size: 0.75em;
-}
-.container button {
-  padding: 1em;
-  background-color: #fba12f;
-  border-radius: 1em;
-  align-self: center;
+  color: #e74c3c;
+  margin-top: -0.3em;
+  margin-bottom: 0.3em;
 }
 
-.error {
-  color: red;
-  margin-bottom: 1rem;
+/* 가입하기 버튼 */
+.container button {
+  padding: 0.6rem;
+  background-color: #fba12f;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.container button:hover {
+  background-color: #f57c00;
+}
+
+/* 소셜 로그인 영역 */
+.socialLogin {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+.socialLogin p {
+  margin-bottom: 0.5rem;
 }

@@ -57,7 +57,10 @@ export const LoginPage = () => {
     <div className={css.fullscreenWrapper}>
       <main className={css.loginpage}>
         <div className={css.leftSection}>
-          <h4> 바쁜 하루에도 나만의 작은 쉼표를 남겨보세요.</h4>
+          <h3>
+            바쁜 하루에도
+            <br /> 나만의 작은 쉼표를 남겨보세요.
+          </h3>
           <img src={logoFull} alt="로고" className={css.loginLogo} />
           <p>
             아직 회원이 아니신가요?{' '}

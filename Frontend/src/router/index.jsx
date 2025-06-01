@@ -10,6 +10,17 @@ import { MyPage } from '../pages/MyPage'
 import { UserInfoUpdate } from '../pages/UserInfoUpdate'
 
 export const router = createBrowserRouter([
+  // 회원가입, 로그인은 단독 경로 (공통 레이아웃 X)
+  {
+    path: '/register',
+    element: <RegisterPage />,
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+
+  // 나머지 페이지는 공통 레이아웃 안에서 렌더링
   {
     path: '/',
     element: <DefaultLayout />,
@@ -18,14 +29,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <PostListPage />,
-      },
-      {
-        path: 'register',
-        element: <RegisterPage />,
-      },
-      {
-        path: 'login',
-        element: <LoginPage />,
       },
       {
         path: 'createPost',
@@ -44,7 +47,7 @@ export const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: '/update-profile',
+        path: 'update-profile',
         element: <UserInfoUpdate />,
       },
     ],

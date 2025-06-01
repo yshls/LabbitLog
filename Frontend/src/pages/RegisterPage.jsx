@@ -69,15 +69,17 @@ export const RegisterPage = () => {
 
         <input
           {...register('password')}
+          type="password"
           placeholder="비밀번호: 영문, 숫자, 특수기호 포함, 8자 이상"
         />
         <strong>{errors.password?.message}</strong>
 
-        <input {...register('confirmPassword')} placeholder="비밀번호 확인" />
-
+        <input {...register('confirmPassword')} type="password" placeholder="비밀번호 확인" />
         <strong>{errors.confirmPassword?.message}</strong>
+
         <button type="submit">가입하기</button>
       </form>
+
       {/* 소셜 로그인 섹션 추가 */}
       <div className={css.socialLogin}>
         <p>소셜 계정으로 로그인</p>

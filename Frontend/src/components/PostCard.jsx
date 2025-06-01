@@ -3,6 +3,8 @@ import css from './postcard.module.css'
 import { formatDate } from '../utils/features'
 import { useNavigate } from 'react-router-dom'
 
+import { FaRegComment } from 'react-icons/fa'
+
 import LikeButton from './LikeButton' // 좋아요 버튼 컴포넌트
 
 export default function PostCard({ post }) {
@@ -26,7 +28,10 @@ export default function PostCard({ post }) {
             </Link>
             <time className={css.date}>{formatDate(post.createdAt)}</time>
             <LikeButton postId={post._id} initialLikes={post.likes} />
-            <span>💬</span> <span>{post.commentCount || 0}</span>
+            <span>
+              <FaRegComment />
+            </span>
+            <span>{post.commentCount || 0}</span>
           </p>
           <p className={css.summary}>{post.summary}</p>
         </div>

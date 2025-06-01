@@ -99,7 +99,6 @@ export const Header = () => {
       <div className={css.topRight}>
         {!username ? (
           <>
-            <MenuLike to="/register" label="회원가입" />
             <MenuLike to="/login" label="로그인" className={css.loginBtn} />
           </>
         ) : (
