@@ -21,6 +21,7 @@ export default function PostCard({ post }) {
     <article className={css.postcard} onClick={goDetail}>
       <div className={css.text}>
         <h3 className={css.title}>{post.title}</h3>
+        <p className={css.summary}>{post.summary}</p>
         <div className={css.info}>
           <p>
             <Link to={`/mypage/${post.author}`} onClick={handleAuthorClick} className={css.author}>
@@ -28,12 +29,11 @@ export default function PostCard({ post }) {
             </Link>
             <time className={css.date}>{formatDate(post.createdAt)}</time>
             <LikeButton postId={post._id} initialLikes={post.likes} />
-            <span>
+            <span className={css.faicon}>
               <FaRegComment />
             </span>
-            <span>{post.commentCount || 0}</span>
+            <span className={css.faicon}>{post.commentCount || 0}</span>
           </p>
-          <p className={css.summary}>{post.summary}</p>
         </div>
       </div>
       <div className={css.thumbnail}>
@@ -46,3 +46,6 @@ export default function PostCard({ post }) {
     </article>
   )
 }
+
+/** 
+홈페이지에 들어가면 나오는 리스트들!  */

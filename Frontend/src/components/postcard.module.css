@@ -40,7 +40,7 @@
 }
 
 .author {
-  color: #444;
+  color: #fba12f;
   margin-right: 0.5rem;
   text-decoration: none;
 }
@@ -51,6 +51,7 @@
 
 .date {
   color: #aaa;
+  margin-right: 0.5rem;
 }
 
 .thumbnail {
@@ -64,4 +65,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.faicon {
+  margin-left: 0.3rem;
+  color: #aaa;
 }
