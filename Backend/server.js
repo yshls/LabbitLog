@@ -26,6 +26,9 @@ import { User } from './models/User.js'; // ➋ User 모델 import
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
+});
 
 // CORS 설정
 app.use(
