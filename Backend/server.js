@@ -29,6 +29,12 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
+
+app.use((req, res, next) => {
+  console.log('🔎 요청 Origin:', req.headers.origin);
+  next();
+});
+// 환경 변수에서 프론트엔드 URL 가져오기
 console.log('🔥 FRONTEND_URL:', process.env.FRONTEND_URL);
 // CORS 테스트용 라우터 만들기 (진짜 문제 찾는 용도)
 app.get('/cors-test', (req, res) => {
