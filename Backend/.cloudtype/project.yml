@@ -1,0 +1,9 @@
+name: labbitlog
+app: nodejs
+context: ./Backend
+build:
+  env:
+    NODE_ENV: production
+    PORT: 3000
+run:
+  command: node server.js
