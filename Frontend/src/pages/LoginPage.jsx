@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../store/userSlice'
 import logoFull from '../assets/logo-full.png'
 import KakaoLoginButton from '../components/KakaoLoginButton'
-
 import { Link } from 'react-router-dom'
 
 // yup 스키마
