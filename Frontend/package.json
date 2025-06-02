@@ -15,7 +15,9 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.9.0",
+    "build": "^0.1.4",
     "framer-motion": "^12.15.0",
+    "npm": "^11.4.1",
     "party-js": "^2.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -26,6 +28,7 @@
     "react-quill-new": "^3.4.6",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.0",
+    "run": "^1.5.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
