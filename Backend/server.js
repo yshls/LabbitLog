@@ -30,11 +30,22 @@ app.listen(port, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
 console.log('🔥 FRONTEND_URL:', process.env.FRONTEND_URL);
+// CORS 테스트용 라우터 만들기 (진짜 문제 찾는 용도)
+app.get('/cors-test', (req, res) => {
+  res.json({ ok: true, origin: req.headers.origin });
+});
 
 // CORS 설정
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: function (origin, callback) {
+      const allowedOrigin = process.env.FRONTEND_URL;
+      if (origin === allowedOrigin) {
+        callback(null, true); // 허용
+      } else {
+        callback(new Error('CORS 차단: 허용되지 않은 origin'));
+      }
+    },
     credentials: true,
   })
 );
