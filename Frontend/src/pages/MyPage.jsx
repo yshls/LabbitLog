@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getUserPosts, getUserComments, getUserLikes } from '../apis/userApi' // 경로는 실제 프로젝트 구조에 맞게 조정
-import css from '../pages/mypages.module.css' // CSS 모듈을 사용하여 스타일링
+import css from './mypages.module.css' // CSS 모듈을 사용하여 스타일링
 import { formatDate } from '../utils/features'
 
 export const MyPage = () => {
