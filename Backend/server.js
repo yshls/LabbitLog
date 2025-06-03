@@ -46,22 +46,28 @@ const whitelist = [
   undefined, // origin 없는 상황도 허용
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (whitelist.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.warn('❌ CORS 차단됨:', origin);
-        callback(new Error('CORS 차단: 허용되지 않은 origin'));
-      }
-    },
-    credentials: true,
-  })
-);
+// 🔥 1. CORS 옵션 변수 선언 (한 번만)
+const corsOptions = {
+  origin: function (origin, callback) {
+    const whitelist = [
+      process.env.FRONTEND_URL,
+      'http://localhost:5173',
+      undefined,
+    ];
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn('❌ CORS 차단됨:', origin);
+      callback(new Error('CORS 차단: 허용되지 않은 origin'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
 
-//preflight OPTIONS 요청 처리 허용
-app.options('*', cors());
+// ✅ 2. cors 미들웨어 적용 (딱 2줄)
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // JSON 파싱 미들워어
 app.use(express.json());
