@@ -140,3 +140,10 @@ process.on('uncaughtException', (err) => {
 });
 
 console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
+
+// 등록된 모든 라우트 경로 출력 (디버깅용)
+app._router.stack.forEach((r) => {
+  if (r.route && r.route.path) {
+    console.log('라우트 경로:', r.route.path);
+  }
+});
