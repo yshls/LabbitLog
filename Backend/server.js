@@ -26,9 +26,6 @@ import { User } from './models/User.js'; // ➋ User 모델 import
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
-});
 
 app.use((req, res, next) => {
   console.log('🔎 요청 Origin:', req.headers.origin);
@@ -42,10 +39,11 @@ app.get('/cors-test', (req, res) => {
 });
 
 // CORS 설정
+// server.js 또는 app.js에서
 const whitelist = [
-  process.env.FRONTEND_URL,
-  'http://localhost:5173',
-  undefined,
+  process.env.FRONTEND_URL, // 예: https://labbitlog.vercel.app
+  'http://localhost:5173', // 개발용
+  undefined, // origin 없는 상황도 허용
 ];
 
 app.use(
