@@ -79,12 +79,14 @@ export const getProfile = (req, res) => {
   const { token } = req.cookies;
   // console.log("쿠키", token);
   if (!token) {
-    return res.json({ error: '로그인 필요' }); // 오류를 JSON 형식으로 응답
+    return res.status(401).json({ error: '로그인이 필요합니다.' });
   }
+
   jwt.verify(token, secretKey, (err, info) => {
     if (err) {
-      return res.json({ error: '로그인 필요' });
+      return res.status(401).json({ error: '토큰이 유효하지 않습니다.' });
     }
+
     res.json(info);
   });
 };
