@@ -60,6 +60,9 @@ app.use(
   })
 );
 
+//preflight OPTIONS 요청 처리 허용
+app.options('*', cors());
+
 // JSON 파싱 미들웨어
 app.use(express.json());
 
