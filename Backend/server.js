@@ -70,7 +70,8 @@ app.get('/cors-test', (req, res) => {
 });
 
 // 404 처리
-app.use((req, res) => {
+// 404 처리 (v5 스타일 패턴 기반)
+app.all('/{*}', (req, res) => {
   res.status(404).json({ error: '요청한 페이지를 찾을 수 없습니다.' });
 });
 
