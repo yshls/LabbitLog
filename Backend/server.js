@@ -42,13 +42,19 @@ app.get('/cors-test', (req, res) => {
 });
 
 // CORS 설정
+const whitelist = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  undefined,
+];
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      const allowedOrigin = process.env.FRONTEND_URL;
-      if (origin === allowedOrigin) {
-        callback(null, true); // 허용
+      if (whitelist.includes(origin)) {
+        callback(null, true);
       } else {
+        console.warn('❌ CORS 차단됨:', origin);
         callback(new Error('CORS 차단: 허용되지 않은 origin'));
       }
     },
