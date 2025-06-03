@@ -107,9 +107,11 @@ export const PostDetailPage = () => {
         </div>
 
         {/* 이미지 */}
-        <div className={css.detailimg}>
-          <img src={`${import.meta.env.VITE_BACK_URL}/${postInfo?.cover}`} alt="" />
-        </div>
+        {postInfo?.cover && (
+          <div className={css.detailimg}>
+            <img src={`${import.meta.env.VITE_BACK_URL}/${postInfo.cover}`} alt="cover" />
+          </div>
+        )}
 
         {/* 본문 콘텐츠는 info 바깥에 */}
         <div
