@@ -56,7 +56,7 @@ app.get('/uploads/:filename', (req, res) => {
 
 // 라우팅
 app.use('/auth', authRoutes); // 인증 라우트 등록
-app.use('/kakao', kakaoAuthRoutes); // 카카오 인증 라우트 등록
+app.use('/auth/kakao', kakaoAuthRoutes); // 카카오 인증 라우트 등록
 app.use('/posts', postRoutes); // 포스트 관련 라우트 등록
 app.use('/comments', commentRoutes); // 댓글 관련 라우트 등록
 app.use('/users', userRoutes); // 사용자 관련 라우트 등록
