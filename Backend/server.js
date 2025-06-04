@@ -63,7 +63,7 @@ app.use('/users', userRoutes); // 사용자 관련 라우트 등록
 
 // 루트 경로
 app.get('/', (req, res) => {
-  res.send('🟢 LabbitLog 백엔드 서버가 정상 작동 중입니다!'); // 서버 상태 확인 메시지
+  res.send('🐰 LabbitLog 백엔드 서버가 정상 작동 중입니다!'); // 서버 상태 확인 메시지
 });
 
 // CORS 테스트용 라우트
