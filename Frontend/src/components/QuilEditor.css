@@ -5,6 +5,7 @@
 
 .quill-editor-container .quill {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .quill-editor-container .ql-container {
@@ -12,25 +13,32 @@
   font-size: 16px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .quill-editor-container .ql-editor {
   min-height: 200px;
   max-height: 500px;
   overflow-y: auto;
+  word-break: break-word;
+  white-space: normal;
 }
-
 .quill-editor-container .ql-toolbar {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  background-color: #f8f9fa;
+  background-color: #e2e2e2;
 }
 
 /* Quill 에디터로 작성된 콘텐츠를 위한 스타일 */
+
+.ql-content pre {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-x: auto;
+}
+
 .ql-content {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
   line-height: 1.6;
   color: #333;
 }

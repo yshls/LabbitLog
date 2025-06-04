@@ -120,3 +120,24 @@
   color: #fba12f;
   background-color: #fff;
 }
+
+.closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  color: #fba12f;
+
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

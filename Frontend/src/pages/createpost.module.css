@@ -13,8 +13,6 @@
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE */
-
-  border: 1px solid red;
 }
 
 .createpost::-webkit-scrollbar {
