@@ -24,7 +24,7 @@ const app = express();
 const port = process.env.PORT || 3000; // 포트 지정 (.env 없으면 3000)
 
 // CORS 설정 (로컬, 배포 모두 허용)
-const whitelist = ['http://localhost:5173', 'https://labbitlog.vercel.app'];
+const whitelist = ['https://labbitlog.vercel.app', 'http://localhost:5173'];
 const corsOptions = {
   origin: function (origin, callback) {
     console.log('🔥 요청 Origin:', origin); // 요청 온 origin 출력
