@@ -1,4 +1,4 @@
-import axios from 'axios'Add commentMore actions
+import axios from 'axios'
 axios.defaults.withCredentials = true // 모든 요청에 대해 withCredentials 설정
 const API_URL = import.meta.env.VITE_BACK_URL || 'http://localhost:3000'
 
@@ -8,8 +8,14 @@ export const registerUser = async userData => {
 }
 
 export const loginUser = async credentials => {
-  const response = await axios.post(`${API_URL}/auth/login`, credentials)
-  return response.data
+  try {
+    console.log('📤 로그인 요청 데이터:', credentials)
+    const response = await axios.post(`${API_URL}/auth/login`, credentials)
+    return response.data
+  } catch (err) {
+    console.error('❌ 로그인 에러:', err.response?.data || err.message)
+    throw err
+  }
 }
 
 export const logoutUser = async () => {

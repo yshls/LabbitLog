@@ -14,6 +14,12 @@ import commentRoutes from './routes/commentRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import kakaoAuthRoutes from './routes/kakaoAuthRoutes.js';
 
+// console.log('authRoutes:', authRoutes);
+// console.log('postRoutes:', postRoutes);
+// console.log('commentRoutes:', commentRoutes);
+// console.log('userRoutes:', userRoutes);
+// console.log('kakaoAuthRoutes:', kakaoAuthRoutes);
+
 import connectDB from './config/db.js';
 import { errorHandler } from './utils/errorHandler.js';
 import { User } from './models/User.js';
@@ -94,6 +100,8 @@ connectDB()
     console.error('❌ DB 연결 실패:', err);
     process.exit(1);
   });
+
+console.log(app._router.stack.filter((r) => r.route).map((r) => r.route.path));
 
 // 서버 시작
 app.listen(port, () => {
