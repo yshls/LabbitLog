@@ -35,9 +35,8 @@ export const UserInfoUpdate = () => {
     e.preventDefault()
     setError(null)
 
-    // 비밀번호 유효성 검사
     if (password) {
-      if (password.length < 9) {
+      if (password.length < 8) {
         setError('비밀번호는 최소 8자 이상이어야 합니다.')
         return
       }
@@ -51,14 +50,12 @@ export const UserInfoUpdate = () => {
     try {
       setLoading(true)
 
-      // 비밀번호 변경 요청
       const userData = {
-        password: password || undefined, // 비밀번호가 비어있으면 undefined로 설정하여 서버에 전송하지 않음
+        password: password || undefined,
       }
 
       await updateUserInfo(userData)
 
-      // 프로필 정보 다시 불러오기
       const updatedProfile = await getUserProfile()
       dispatch(setUserInfo(updatedProfile))
 
@@ -66,11 +63,10 @@ export const UserInfoUpdate = () => {
       setPassword('')
       setConfirmPassword('')
 
-      // 3초 후 성공 메시지 숨기기
       setTimeout(() => {
         setSuccess(false)
-        navigate(`/userpage/${user.username}`)
-      }, 1000)
+        navigate(`/mypage/${user.username}`) // 경로 수정
+      }, 3000) // 주석에 맞게 3초로 변경
     } catch (err) {
       console.error('사용자 정보 업데이트 실패:', err)
       setError(err.response?.data?.error || '사용자 정보 업데이트에 실패했습니다.')
@@ -80,7 +76,8 @@ export const UserInfoUpdate = () => {
   }
 
   const handleCancel = () => {
-    navigate(`/user/${user.username}`)
+    if (!user?.username) return
+    navigate(`/mypage/${user.username}`)
   }
 
   if (!user) return null // 로그인 상태가 아니면 아무것도 렌더링하지 않음
